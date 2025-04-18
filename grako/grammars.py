@@ -5,7 +5,8 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 
 import os
 import functools
-from collections import defaultdict, Mapping
+from collections import defaultdict
+from collections.abc import Mapping
 from copy import copy
 
 from grako.util import indent, trim, ustr, urepr, strtype, compress_seq, chunks

@@ -80,8 +80,8 @@ class ModelBuilderSemantics(object):
             return self.constructors[typename]
 
         constructor = (
-            self._find_existing_constructor(typename) or
-            synthesize(typename, base)
+            self._find_existing_constructor(typename)
+            or synthesize(typename, base)
         )
 
         return self._register_constructor(constructor)

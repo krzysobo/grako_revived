@@ -19,7 +19,7 @@ from grako.rendering import Renderer
 from grako.codegen.cgbase import ModelRenderer, CodeGenerator
 
 
-NODE_NAME_PATTERN = '(?!\d)\w+(' + BASE_CLASS_TOKEN + '(?!\d)\w+)*'
+NODE_NAME_PATTERN = r'(?!\d)\w+(' + BASE_CLASS_TOKEN + r'(?!\d)\w+)*'
 
 
 _TypeSpec = NT('TypeSpec', ['class_name', 'base'])

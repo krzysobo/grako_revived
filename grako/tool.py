@@ -140,7 +140,7 @@ __compiled_grammar_cache = {}
 
 
 def parse(grammar, input, **kwargs):
-    global __compiled_grammar_cache
+    # global __compiled_grammar_cache   # TODO PROBABLY unneeded as of PY 3.9 and 3.12, reported by Flake8 as such
     cache = __compiled_grammar_cache
     model = cache.setdefault(grammar, compile(grammar, **kwargs))
     return model.parse(input, **kwargs)

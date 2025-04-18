@@ -45,7 +45,7 @@ if PY3:
         from collections import abc
         Mapping = abc.Mapping
     else:
-        Mapping = collections.Mapping
+        Mapping = collections.abc.Mapping
     zip_longest = itertools.zip_longest
     import builtins
     imap = map
@@ -53,7 +53,7 @@ if PY3:
 else:
     strtype = basestring  # noqa
     _unicode = unicode
-    Mapping = collections.Mapping
+    Mapping = collections.abc.Mapping
     zip_longest = itertools.izip_longest
     imap = itertools.imap
     import __builtin__ as builtins
@@ -95,7 +95,7 @@ def identity(*args):
 
 
 def is_list(o):
-    return type(o) == list
+    return isinstance(o, list)
 
 
 def to_list(o):
@@ -188,8 +188,8 @@ def eval_escapes(s):
 
 def isiter(value):
     return (
-        isinstance(value, collections.Iterable) and
-        not isinstance(value, strtype)
+        isinstance(value, collections.abc.Iterable)
+        and not isinstance(value, strtype)
     )
 
 
@@ -210,8 +210,8 @@ def trim(text, tabwidth=4):
         if stripped:
             indent = min(indent, len(line) - len(stripped))
     trimmed = (
-        [lines[0].strip()] +
-        [line[indent:].rstrip() for line in lines[1:]]
+        [lines[0].strip()]
+        + [line[indent:].rstrip() for line in lines[1:]]
     )
     i = 0
     while i < len(trimmed) and not trimmed[i]:
@@ -240,11 +240,15 @@ def notnone(value, default=None):
 
 
 def timestamp():
-    return '.'.join('%2.2d' % t for t in datetime.datetime.utcnow().utctimetuple()[:-2])
+    # dt_now = datetime.datetime.utcnow()   # deprecated in Python 3.12
+    dt_now = datetime.datetime.now(datetime.timezone.utc)   # compatible with Python 3.9 and 3.12 - utcnow is deprecated in 3.12
+
+    return '.'.join('%2.2d' % t for t in dt_now.utctimetuple()[:-2])
 
 
 def asjson(obj, seen=None):
-    if isinstance(obj, collections.Mapping) or isiter(obj):
+
+    if isinstance(obj, collections.abc.Mapping) or isiter(obj):
         # prevent traversal of recursive structures
         if seen is None:
             seen = set()
@@ -254,7 +258,7 @@ def asjson(obj, seen=None):
 
     if hasattr(obj, '__json__') and type(obj) is not type:
         return obj.__json__()
-    elif isinstance(obj, collections.Mapping):
+    elif isinstance(obj, collections.abc.Mapping):
         result = collections.OrderedDict()
         for k, v in obj.items():
             try:

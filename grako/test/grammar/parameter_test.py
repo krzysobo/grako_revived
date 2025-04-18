@@ -14,7 +14,7 @@ from grako.codegen import codegen
 class ParameterTests(unittest.TestCase):
 
     def test_keyword_params(self):
-        grammar = '''
+        grammar = r'''
             start(k1=1, k2=2)
                 =
                 {'a'} $
@@ -27,7 +27,7 @@ class ParameterTests(unittest.TestCase):
         pass
 
     def test_35_only_keyword_params(self):
-        grammar = '''
+        grammar = r'''
             rule(kwdA=A, kwdB=B)
                 =
                 'a'
@@ -37,7 +37,7 @@ class ParameterTests(unittest.TestCase):
         self.assertEqual(trim(grammar), ustr(model))
 
     def test_36_params_and_keyword_params(self):
-        grammar = '''
+        grammar = r'''
             rule(A, kwdB=B)
                 =
                 'a'
@@ -79,7 +79,7 @@ class ParameterTests(unittest.TestCase):
                 assert_equal('+', k4)
                 return ast
 
-        grammar = '''
+        grammar = r'''
             @@ignorecase::False
             @@nameguard
 
@@ -93,7 +93,7 @@ class ParameterTests(unittest.TestCase):
                 = 'c' ;
         '''
 
-        pretty = '''
+        pretty = r'''
             @@ignorecase :: False
             @@nameguard :: True
 
@@ -133,7 +133,7 @@ class ParameterTests(unittest.TestCase):
         codegen(model)
 
     def test_36_unichars(self):
-        grammar = '''
+        grammar = r'''
             start = { rule_positional | rule_keywords | rule_all }* $ ;
 
             rule_positional("ÄÖÜäöüß") = 'a' ;
@@ -193,20 +193,20 @@ class ParameterTests(unittest.TestCase):
         _trydelete("tc36unicharstest")
 
     def test_numbers_and_unicode(self):
-        grammar = '''
+        grammar = r'''
             rúle(1, -23, 4.56, 7.89e-11, 0xABCDEF, Añez)
                 =
                 'a'
                 ;
         '''
-        rule2 = '''
+        rule2 = r'''
 
             rulé::Añez
                 =
                 '\\xf1'
                 ;
         '''
-        rule3 = '''
+        rule3 = r'''
 
             rúlé::Añez
                 =

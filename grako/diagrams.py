@@ -10,7 +10,7 @@ from grako.walkers import NodeWalker
 
 try:
     import pygraphviz as pgv
-except:
+except Exception:
     raise
 
 
@@ -251,20 +251,20 @@ class GraphvizWalker(NodeWalker):
                 self.edge(n, n1)
         return (i, e)
 
-    def walk_Lookahead(self, l):
-        i, e = self._walk_decorator(l)
+    def walk_Lookahead(self, looky):
+        i, e = self._walk_decorator(looky)
         n = self.node('&')
         self.edge(n, e)
         return (n, e)
 
-    def walk_NegativeLookahead(self, l):
-        i, e = self._walk_decorator(l)
+    def walk_NegativeLookahead(self, looky):
+        i, e = self._walk_decorator(looky)
         n = self.node('!')
         self.edge(n, e)
         return (n, e)
 
-    def walk_RuleInclude(self, l):
-        i, e = self._walk_decorator(l)
+    def walk_RuleInclude(self, looky):
+        i, e = self._walk_decorator(looky)
         n = self.node('>')
         self.edge(n, e)
         return (n, e)

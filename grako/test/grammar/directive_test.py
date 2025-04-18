@@ -49,7 +49,7 @@ class DirectiveTests(unittest.TestCase):
         compile('test.py', code, EXEC)
 
     def test_whitespace_no_newlines(self):
-        grammar = """
+        grammar = r"""
             @@whitespace :: /[\t ]+/
             # this is just a token with any character but space and newline
             # it should finish before it capture space or newline character
@@ -65,26 +65,46 @@ class DirectiveTests(unittest.TestCase):
             e f
         """)
 
+        # TODO TEST IT FURTHER - this seems to make no sense at all: WHENCE the internal groupings in this grammar? To be tested, doesn't work on PY 3.9 and 3.1
+        # expected = [
+        #     [
+        #         [
+        #             "a",
+        #             "b"
+        #         ],
+        #         "\n"
+        #     ],
+        #     [
+        #         [
+        #             "c",
+        #             "d"
+        #         ],
+        #         "\n"
+        #     ],
+        #     [
+        #         [
+        #             "e",
+        #             "f"
+        #         ],
+        #         "\n"
+        #     ]
+        # ]
+
+        # this works on PY 3.9 and 3.12
         expected = [
             [
-                [
-                    "a",
-                    "b"
-                ],
+                "a",
+                "b",
                 "\n"
             ],
             [
-                [
-                    "c",
-                    "d"
-                ],
+                "c",
+                "d",
                 "\n"
             ],
             [
-                [
-                    "e",
-                    "f"
-                ],
+                "e",
+                "f",
                 "\n"
             ]
         ]

@@ -364,8 +364,8 @@ class Rule(_Decorator):
                 sdefines = '\n\n    self.ast._define(%s, %s)' % (sdefs, ldefs)
             else:
                 sdefines = indent(
-                    '\n' +
-                    trim(self.define_template % (sdefs, ldefs))
+                    '\n'
+                    + trim(self.define_template % (sdefs, ldefs))
                 )
 
         fields.update(defines=sdefines)

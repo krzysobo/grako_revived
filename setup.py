@@ -31,8 +31,9 @@ setuptools.setup(
     author='Juancarlo Añez',
     author_email='apalala@gmail.com',
     description=SHORT_DESCRIPTION,
-    long_description=io.open('README.rst', encoding='utf-8').read(),
+    long_description=io.open('README.md', encoding='utf-8').read(),
     license='BSD License',
+    license_files=['LICENSE.txt'],
     packages=setuptools.find_packages(),
     include_package_data=True,
     entry_points={
@@ -42,7 +43,7 @@ setuptools.setup(
     },
     classifiers=[
         'Development Status :: 5 - Production/Stable',
-        'License :: OSI Approved :: BSD License',
+        # 'License :: OSI Approved :: BSD License',   // deprecated classifier
         'Natural Language :: English',
         'Intended Audience :: Developers',
         'Intended Audience :: Science/Research',

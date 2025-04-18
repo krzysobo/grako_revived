@@ -11,3 +11,5 @@ regex>=2016.11
 tox>=2.5
 tox-travis>=0.5
 twine>=1.8
+setuptools>=78.1.0
+

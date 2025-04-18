@@ -5,7 +5,7 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 
 import copy
 from collections import OrderedDict
-from collections import Callable
+from collections.abc import Callable
 
 
 # Source: http://stackoverflow.com/a/6190500/562769

@@ -1,0 +1,38 @@
+# \.hgingore$
+# \.(pyc|pyo|swp|orig|c|so)$
+#*.{pyc, pyo, swp, orig, c, so}
+*.pyc
+*.pyo
+*.swp
+*.orig
+*.c
+*.so
+
+^\.
+tmp/
+env
+MANIFEST$
+dist
+build
+.eggs
+.venv*
+
+grako.egg-info/
+examples/*/grako
+examples/*/*_parser.py
+examples/*/*_model.py
+examples/*/python.ebnf
+examples/calc/*/calc_parser.py
+examples/calc/*/calc_model.py
+
+genparser.py
+parser_base.py
+docs/_build/
+.ropeproject/
+grako.build/
+__pycache__
+
+# IDEs
+.idea
+.DS_Store
+.tox/

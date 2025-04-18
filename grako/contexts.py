@@ -387,9 +387,8 @@ class ParseContext(object):
             self._trace('%s   \n%s%s \n',
                         event + self._rulestack(),
                         color.Style.DIM + fname,
-                        color.Style.NORMAL + self._buffer.lookahead().rstrip('\r\n') +
-                        color.Style.RESET_ALL
-                        )
+                        color.Style.NORMAL + self._buffer.lookahead().rstrip('\r\n')
+                        + color.Style.RESET_ALL)
 
     def _trace_entry(self):
         self._trace_event(color.Fore.YELLOW + color.Style.BRIGHT + C_ENTRY)
@@ -420,9 +419,8 @@ class ParseContext(object):
                 token,
                 name,
                 color.Style.DIM + fname,
-                color.Style.NORMAL + self._buffer.lookahead().rstrip('\r\n') +
-                color.Style.RESET_ALL
-            )
+                color.Style.NORMAL + self._buffer.lookahead().rstrip('\r\n')
+                + color.Style.RESET_ALL)
 
     def _error(self, item, etype=FailedParse):
         raise etype(
@@ -564,8 +562,8 @@ class ParseContext(object):
         cache = self._memoization_cache
         last_pos = pos
         if (
-            [name] == self._recursive_head[-1:] and
-            self._recursive_head[-1:] != self._recursive_eval[-1:]
+            [name] == self._recursive_head[-1:]
+            and self._recursive_head[-1:] != self._recursive_eval[-1:]
         ):
             # Repeatedly apply the rule until it can't consume any
             # more. We store the last good result each time. Prior
@@ -647,7 +645,7 @@ class ParseContext(object):
             yield
             ast = self.ast
             cst = self.cst
-        except:
+        except Exception:
             self._goto(p)
             self._state = s
             raise
